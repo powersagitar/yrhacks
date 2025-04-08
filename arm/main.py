@@ -3,7 +3,12 @@ import cv2
 from adafruit_servokit import ServoKit
 import time
 
-# 1, 3, 5, 10 13
+pin_index = 0
+pin_thumb = 2
+pin_ring = 4
+pin_pinky = 10
+pin_middle = 14
+
 kit = ServoKit(channels=16)
 
 cap = cv2.VideoCapture(0)
@@ -12,52 +17,52 @@ detector = HandDetector(detectionCon=0.8, maxHands=1)
 while True:
     success, img = cap.read()
     hands, img = detector.findHands(img)
-    
+
     if hands:
-        hands1=hands[0]
-        fingers1 = detector.fingersUp(hands1)
-        print(fingers1)
-        #thumb
-        if fingers1[0]==0:
-            print("down", end = ", ")
-            kit.servo[0].angle = 10   
-        elif fingers1[0]==1:
-            print("up", end = ", ")
-            kit.servo[0].angle = 0
-        #index
-        if fingers1[1]==0:
-            print("down", end = ", ")
-            kit.servo[1].angle = 10
-        elif fingers1[1]==1:
-            print("up", end = ", ")
-            kit.servo[1].angle = 0
-        #middle
-        if fingers1[2]==0:
-            print("down", end = ", ")
-            kit.servo[2].angle = 10
-        elif fingers1[2]==1:
-            print("up", end = ", ")
-            kit.servo[2].angle = 0
-        #ring
-        if fingers1[3]==0:
-            print("down", end = ", ")
-            kit.servo[3].angle = 10
-        elif fingers1[3]==1:
-            print("up", end = ", ")
-            kit.servo[3].angle = 0
-        #pinky
-        if fingers1[4]==0:
-            print("down")
-            kit.servo[4].angle = 10
-        elif fingers1[4]==1:
-            print("up")
-            kit.servo[4].angle = 0
-      
-            
-    cv2.imshow("img",img)
-    if cv2.waitKey(1)&0xFF==27:
+        hand = hands[0]
+        fingers = detector.fingersUp(hand)
+
+        # thumb
+        if fingers[0] == 0:
+            kit.servo[pin_thumb].angle = 180
+
+        elif fingers[0] == 1:
+            kit.servo[pin_thumb].angle = 0
+
+        # index
+        if fingers[1] == 0:
+            kit.servo[pin_index].angle = 180
+
+        elif fingers[1] == 1:
+            kit.servo[pin_index].angle = 0
+
+        # middle
+        if fingers[2] == 0:
+            kit.servo[pin_middle].angle = 180
+
+        elif fingers[2] == 1:
+            kit.servo[pin_middle].angle = 0
+
+        # ring
+        if fingers[3] == 0:
+            kit.servo[pin_ring].angle = 180
+
+        elif fingers[3] == 1:
+            kit.servo[pin_ring].angle = 0
+
+        # pinky
+        if fingers[4] == 0:
+            kit.servo[pin_pinky].angle = 180
+
+        elif fingers[4] == 1:
+            kit.servo[pin_pinky].angle = 0
+
+    cv2.imshow("img", img)
+
+    if cv2.waitKey(1) & 0xFF == 27:
         break
-    elif cv2.waitKey(1)&0xFF=='0':
+
+    elif cv2.waitKey(1) & 0xFF == "0":
         kit.servo[0].angle = 0
         kit.servo[1].angle = 0
         kit.servo[2].angle = 0
