@@ -5,4 +5,4 @@ kit = ServoKit(channels=16)
 while True:
     p=input('pin: ')
     a=input('value: ')
-    kit.servo[p].angle = int(a)   
+    kit.servo[int(p)].angle = int(a)   
