@@ -4,4 +4,4 @@ kit = ServoKit(channels=16)
 
 while True:
     a=input('enter:-')
-    kit.servo[0].angle = int(a)   
+    kit.servo[1].angle = int(a)   
