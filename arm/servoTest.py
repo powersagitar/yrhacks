@@ -1,6 +1,10 @@
 from adafruit_servokit import ServoKit
 
-# 1, 3, 5, 10 13
+# index = 0
+# thumb = 2
+# ring = 4
+# pinky = 10
+# middle = 14
 kit = ServoKit(channels=16)
 
 while True:
