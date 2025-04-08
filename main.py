@@ -22,6 +22,13 @@ while True:
         hand = hands[0]
         fingers = detector.fingersUp(hand)
 
+        # index
+        if fingers[1] == 0:
+            kit.servo[pin_index].angle = 90
+
+        elif fingers[1] == 1:
+            kit.servo[pin_index].angle = 0
+
         # thumb
         if fingers[0] == 0:
             kit.servo[pin_thumb].angle = 180
@@ -29,33 +36,26 @@ while True:
         elif fingers[0] == 1:
             kit.servo[pin_thumb].angle = 0
 
-        # index
-        if fingers[1] == 0:
-            kit.servo[pin_index].angle = 180
-
-        elif fingers[1] == 1:
-            kit.servo[pin_index].angle = 0
-
-        # middle
-        if fingers[2] == 0:
-            kit.servo[pin_middle].angle = 180
-
-        elif fingers[2] == 1:
-            kit.servo[pin_middle].angle = 0
-
         # ring
         if fingers[3] == 0:
-            kit.servo[pin_ring].angle = 180
+            kit.servo[pin_ring].angle = 0
 
         elif fingers[3] == 1:
-            kit.servo[pin_ring].angle = 0
+            kit.servo[pin_ring].angle = 100
 
         # pinky
         if fingers[4] == 0:
-            kit.servo[pin_pinky].angle = 180
+            kit.servo[pin_pinky].angle = 0
 
         elif fingers[4] == 1:
-            kit.servo[pin_pinky].angle = 0
+            kit.servo[pin_pinky].angle = 100
+
+        # middle
+        if fingers[2] == 0:
+            kit.servo[pin_middle].angle = 0
+
+        elif fingers[2] == 1:
+            kit.servo[pin_middle].angle = 180
 
     cv2.imshow("img", img)
 
