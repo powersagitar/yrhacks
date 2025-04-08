@@ -3,6 +3,7 @@ from adafruit_servokit import ServoKit
 kit = ServoKit(channels=16)
 
 while True:
-    p=input('pin: ')
+    #p=input('pin: ')
     a=input('value: ')
-    kit.servo[int(p)].angle = int(a)   
+    for i in range(16):
+        kit.servo[i].angle = int(a)   
